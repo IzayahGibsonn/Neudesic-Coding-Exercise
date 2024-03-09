@@ -37,13 +37,17 @@ function updateAmortizationTable() {
     const tableBody = document.getElementById('amortizationSchedule');
     tableBody.innerHTML = '';
 
-    amortizationSchedule.forEach((data) => {
+    schedule.forEach((monthData) => {
         const row = tableBody.insertRow(); 
-        row.insertCell().textContent = data.month;
-        row.insertCell().textContent = data.principalRemaining.toFixed(2);
-        row.insertCell().textContent = data.principalPaid.toFixed(2);
-        row.insertCell().textContent = data.interestPaid.toFixed(2);
-        row.insertCell().textContent = data.totalMonthlyPayment.toFixed(2);
+        row.insertCell().textContent = monthData.month;
+        row.insertCell().textContent = monthData.principalRemaining.toFixed(2);
+        row.insertCell().textContent = monthData.principalPaid.toFixed(2);
+        row.insertCell().textContent = monthData.interestPaid.toFixed(2);
+        row.insertCell().textContent = monthData.totalMonthlyPayment.toFixed(2);
     });
 
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('calculateButton').addEventListener('click', updateAmortizationTable);
+});

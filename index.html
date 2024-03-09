@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mortgage Amortization Calculator</title>
+    <script src="calcschedule.js"></script>
 </head>
 <body>
     <form id="loanCalculatorForm">
@@ -16,8 +17,8 @@
         <label for="numMonths">Loan Length (Months):</label>
         <input type="number" id="numMonths" name="numMonths" min="1"><br>
 
-        <label for="loanStartDate">Loan Starting Date:</label>
-        <input type="date" id="loanStartDate" name="loanStartDate"><br>
+        <button type="button" id="calculateButton">Calculate</button>
+
     </form>
     
     <table border="1">
@@ -32,6 +33,7 @@
                 <th>Total Paid</th>
             </tr>
         </thead>
+        <tbody id="amortizationSchedule"></tbody>
     </table>
 </body>
 </html>
