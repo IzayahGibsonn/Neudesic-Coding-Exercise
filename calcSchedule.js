@@ -3,6 +3,8 @@ function calculateAmortizationSchedule(loanAmount, numMonths, interestRate) {
     const monthlyPayment = loanAmount * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -numMonths));
 
     let balance = loanAmount;
+    let totalInterestPaid = 0;
+    let totalAmountPaid = 0;
     // Use array to hold the information for each month 
     let amortizationSchedule = [];
 
@@ -15,13 +17,19 @@ function calculateAmortizationSchedule(loanAmount, numMonths, interestRate) {
         // (Caused issues)
         balance -= principalPaid;
 
+        totalInterestPaid += interestPaid;
+        totalAmountPaid += monthlyPayment;
+
+
         amortizationSchedule.push({
             month: month,
             // Ensure remaining payment cannot be less than 0
             principalRemaining: balance > 0 ? balance : 0,
             interestPaid: interestPaid,
             principalPaid: principalPaid,
-            totalMonthlyPayment: monthlyPayment
+            totalMonthlyPayment: monthlyPayment,
+            totalInterestPaid: totalInterestPaid,
+            totalAmountPaid: totalAmountPaid
         });
     }
     return amortizationSchedule;
@@ -35,19 +43,24 @@ function updateAmortizationTable() {
     const schedule = calculateAmortizationSchedule(loanAmount, numMonths, interestRate);
 
     const tableBody = document.getElementById('amortizationSchedule');
+    // Clear dataset
     tableBody.innerHTML = '';
 
-    schedule.forEach((monthData) => {
+    schedule.forEach((month) => {
         const row = tableBody.insertRow(); 
-        row.insertCell().textContent = monthData.month;
-        row.insertCell().textContent = monthData.principalRemaining.toFixed(2);
-        row.insertCell().textContent = monthData.principalPaid.toFixed(2);
-        row.insertCell().textContent = monthData.interestPaid.toFixed(2);
-        row.insertCell().textContent = monthData.totalMonthlyPayment.toFixed(2);
+        // .toFixed rounds to nearest hundreth place
+        row.insertCell().textContent = month.month;
+        row.insertCell().textContent = month.principalRemaining.toFixed(2);
+        row.insertCell().textContent = month.principalPaid.toFixed(2);
+        row.insertCell().textContent = month.interestPaid.toFixed(2);
+        row.insertCell().textContent = month.totalMonthlyPayment.toFixed(2);
+        row.insertCell().textContent = month.totalInterestPaid.toFixed(2)
+        row.insertCell().textContent = month.totalAmountPaid.toFixed(2)
     });
 
 }
 
+// Upon clicking 'calculate' call updateAmortizationTable
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('calculateButton').addEventListener('click', updateAmortizationTable);
 });
