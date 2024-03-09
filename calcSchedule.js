@@ -48,19 +48,25 @@ function updateAmortizationTable() {
 
     schedule.forEach((month) => {
         const row = tableBody.insertRow(); 
-        // .toFixed rounds to nearest hundreth place
         row.insertCell().textContent = month.month;
-        row.insertCell().textContent = month.principalRemaining.toFixed(2);
-        row.insertCell().textContent = month.principalPaid.toFixed(2);
-        row.insertCell().textContent = month.interestPaid.toFixed(2);
-        row.insertCell().textContent = month.totalMonthlyPayment.toFixed(2);
-        row.insertCell().textContent = month.totalInterestPaid.toFixed(2)
-        row.insertCell().textContent = month.totalAmountPaid.toFixed(2)
+        // .toFixed rounds to nearest hundreth place an
+        row.insertCell().textContent = `$${month.principalRemaining.toFixed(2)}`;
+        row.insertCell().textContent = `$${month.principalPaid.toFixed(2)}`;
+        row.insertCell().textContent = `$${month.interestPaid.toFixed(2)}`;
+        row.insertCell().textContent = `$${month.totalMonthlyPayment.toFixed(2)}`;
+        row.insertCell().textContent = `$${month.totalInterestPaid.toFixed(2)}`;
+        row.insertCell().textContent = `$${month.totalAmountPaid.toFixed(2)}`;
     });
-
 }
 
 // Upon clicking 'calculate' call updateAmortizationTable
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('calculateButton').addEventListener('click', updateAmortizationTable);
+});
+
+// Upon clicking 'clear' reset all input fields
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById("clearButton").onclick = function() {
+        document.getElementById("loanCalculatorForm").reset();
+    };
 });

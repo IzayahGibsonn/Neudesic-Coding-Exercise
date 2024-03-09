@@ -5,22 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mortgage Amortization Calculator</title>
     <script src="calcschedule.js"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <form id="loanCalculatorForm">
-        <label for="loanAmount">Loan Amount:</label>
-        <input type="text" id="loanAmount" name="loanAmount"><br>
+    <div class="form-container">
+        <form id="loanCalculatorForm">
+            <div class="input-group">
+                <label for="loanAmount">Loan Amount:</label>
+                <input type="text" id="loanAmount" name="loanAmount" placeholder="$ Amount">
+            </div>
+            
+            <div class="input-group">
+                <label for="interestRate">Interest Rate:</label>
+                <input type="text" id="interestRate" name="interestRate" placeholder="Rate %">
+            </div>
+            
+            <div class="input-group">
+                <label for="numMonths">Loan Length:</label>
+                <input type="number" id="numMonths" name="numMonths" min="1" placeholder="Months">
+            </div>
+            
+            <div class="button-group">
+                <button type="button" id="calculateButton">Calculate</button>
+                <button type="button" id="clearButton">Clear</button>
+            </div>
 
-        <label for="interestRate">Interest Rate:</label>
-        <input type="text" id="interestRate" name="interestRate"><br>
+        </form>
+    </div>
 
-        <label for="numMonths">Loan Length (Months):</label>
-        <input type="number" id="numMonths" name="numMonths" min="1"><br>
-
-        <button type="button" id="calculateButton">Calculate</button>
-
-    </form>
-    
     <table border="1">
         <thead>
             <tr>
