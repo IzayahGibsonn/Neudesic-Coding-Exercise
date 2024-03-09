@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="content-container">
+
     <div class="form-container">
         <form id="loanCalculatorForm">
             <div class="input-group">
@@ -31,7 +33,15 @@
             </div>
 
         </form>
+        </div>
+
+        <div class="results-container">
+            <p>Monthly Payment: <span id="monthlyPayment">-</span></p>
+            <p>Total Interest Paid: <span id="totalInterestPaid">-</span></p>
+            <p>Total Amount Paid: <span id="totalAmountPaid">-</span></p>
+        </div>
     </div>
+
 
     <table border="1">
         <thead>

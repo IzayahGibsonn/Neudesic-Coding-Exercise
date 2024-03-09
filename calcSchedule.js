@@ -32,7 +32,10 @@ function calculateAmortizationSchedule(loanAmount, numMonths, interestRate) {
             totalAmountPaid: totalAmountPaid
         });
     }
-    return amortizationSchedule;
+    return {
+        amortizationSchedule,totalMonthlyPayment: monthlyPayment, totalInterestPaid, totalAmountPaid
+    }; 
+
 }
 
 function updateAmortizationTable() {
@@ -40,13 +43,15 @@ function updateAmortizationTable() {
     const interestRate = parseFloat(document.getElementById('interestRate').value);
     const numMonths = parseInt(document.getElementById('numMonths').value);
 
-    const schedule = calculateAmortizationSchedule(loanAmount, numMonths, interestRate);
+    // This now includes the totals
+    const { amortizationSchedule, totalMonthlyPayment, totalInterestPaid, totalAmountPaid } =
+    calculateAmortizationSchedule(loanAmount, numMonths, interestRate);
 
     const tableBody = document.getElementById('amortizationSchedule');
     // Clear dataset
     tableBody.innerHTML = '';
 
-    schedule.forEach((month) => {
+    amortizationSchedule.forEach((month) => {
         const row = tableBody.insertRow(); 
         row.insertCell().textContent = month.month;
         // .toFixed rounds to nearest hundreth place an
@@ -57,6 +62,10 @@ function updateAmortizationTable() {
         row.insertCell().textContent = `$${month.totalInterestPaid.toFixed(2)}`;
         row.insertCell().textContent = `$${month.totalAmountPaid.toFixed(2)}`;
     });
+
+    document.getElementById("monthlyPayment").textContent = `$${totalMonthlyPayment.toFixed(2)}`;
+    document.getElementById("totalInterestPaid").textContent = `$${totalInterestPaid.toFixed(2)}`;
+    document.getElementById("totalAmountPaid").textContent = `$${totalAmountPaid.toFixed(2)}`;
 }
 
 // Upon clicking 'calculate' call updateAmortizationTable
