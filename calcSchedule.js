@@ -27,9 +27,6 @@ function calculateAmortizationSchedule(loanAmount, numMonths, interestRate) {
             principalRemaining: balance > 0 ? balance : 0,
             interestPaid: interestPaid,
             principalPaid: principalPaid,
-            totalMonthlyPayment: monthlyPayment,
-            totalInterestPaid: totalInterestPaid,
-            totalAmountPaid: totalAmountPaid
         });
     }
     return {
@@ -58,9 +55,6 @@ function updateAmortizationTable() {
         row.insertCell().textContent = `$${month.principalRemaining.toFixed(2)}`;
         row.insertCell().textContent = `$${month.principalPaid.toFixed(2)}`;
         row.insertCell().textContent = `$${month.interestPaid.toFixed(2)}`;
-        row.insertCell().textContent = `$${month.totalMonthlyPayment.toFixed(2)}`;
-        row.insertCell().textContent = `$${month.totalInterestPaid.toFixed(2)}`;
-        row.insertCell().textContent = `$${month.totalAmountPaid.toFixed(2)}`;
     });
 
     document.getElementById("monthlyPayment").textContent = `$${totalMonthlyPayment.toFixed(2)}`;
