@@ -14,9 +14,8 @@ function calculateAmortizationSchedule(loanAmount, numMonths, interestRate) {
         const principalPaid = monthlyPayment - interestPaid;
 
         // Upadte balance by subtracting the principal
-        // (Caused issues)
         balance -= principalPaid;
-
+        // Keep running total
         totalInterestPaid += interestPaid;
         totalAmountPaid += monthlyPayment;
 
@@ -30,7 +29,7 @@ function calculateAmortizationSchedule(loanAmount, numMonths, interestRate) {
         });
     }
     return {
-        amortizationSchedule,totalMonthlyPayment: monthlyPayment, totalInterestPaid, totalAmountPaid
+        amortizationSchedule, monthlyPayment, totalInterestPaid, totalAmountPaid
     }; 
 
 }
@@ -40,36 +39,47 @@ function updateAmortizationTable() {
     const interestRate = parseFloat(document.getElementById('interestRate').value);
     const numMonths = parseInt(document.getElementById('numMonths').value);
 
-    // This now includes the totals
-    const { amortizationSchedule, totalMonthlyPayment, totalInterestPaid, totalAmountPaid } =
+
+    const { amortizationSchedule, monthlyPayment, totalInterestPaid, totalAmountPaid } =
     calculateAmortizationSchedule(loanAmount, numMonths, interestRate);
 
-    const tableBody = document.getElementById('amortizationSchedule');
+    const table = document.getElementById('amortizationSchedule');
     // Clear dataset
-    tableBody.innerHTML = '';
+    table.innerHTML = '';
 
     amortizationSchedule.forEach((month) => {
-        const row = tableBody.insertRow(); 
+        const row = table.insertRow(); 
         row.insertCell().textContent = month.month;
-        // .toFixed rounds to nearest hundreth place an
-        row.insertCell().textContent = `$${month.principalRemaining.toFixed(2)}`;
-        row.insertCell().textContent = `$${month.principalPaid.toFixed(2)}`;
-        row.insertCell().textContent = `$${month.interestPaid.toFixed(2)}`;
+        // .toFixed rounds to nearest hundreth place
+        row.insertCell().textContent = `$${month.principalRemaining.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+        row.insertCell().textContent = `$${month.principalPaid.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+        row.insertCell().textContent = `$${month.interestPaid.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
     });
 
-    document.getElementById("monthlyPayment").textContent = `$${totalMonthlyPayment.toFixed(2)}`;
-    document.getElementById("totalInterestPaid").textContent = `$${totalInterestPaid.toFixed(2)}`;
-    document.getElementById("totalAmountPaid").textContent = `$${totalAmountPaid.toFixed(2)}`;
+    document.getElementById("monthlyPayment").textContent = `$${monthlyPayment.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+    document.getElementById("totalInterestPaid").textContent = `$${totalInterestPaid.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+    document.getElementById("totalAmountPaid").textContent = `$${totalAmountPaid.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+}
+
+function initializeBlankTableRows() {
+    const table = document.getElementById('amortizationSchedule');
+    table.innerHTML = ''; 
+
+    for (let i = 0; i < 4; i++) {
+        const row = table.insertRow();
+        for (let j = 0; j < 4; j++) { 
+            row.insertCell().innerHTML = "&nbsp;"; 
+        }
+    }
 }
 
 // Upon clicking 'calculate' call updateAmortizationTable
+// Upon clicking 'clear' reset all input fields and reinitialize table
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('calculateButton').addEventListener('click', updateAmortizationTable);
-});
-
-// Upon clicking 'clear' reset all input fields
-document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("clearButton").onclick = function() {
         document.getElementById("loanCalculatorForm").reset();
+        initializeBlankTableRows();
     };
+    initializeBlankTableRows(); 
 });

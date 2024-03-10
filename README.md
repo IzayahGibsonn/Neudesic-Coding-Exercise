@@ -15,3 +15,13 @@ Expectations
 - There are no language or framework requirements.
 - The project should be published on GitHub with regular commit check-ins.
 - You are expected to be able to present your project and answer basic questions about your implementation. Come ready to talk about your implementation, and the different considerations you made at each step.
+
+Things I did external research on:
+- .toLocaleString() for comma placement.
+    - This replaces .toFixed() and allows for a decimal precision of exactly 2. 
+    - Places commas in the correct space depending on the user's location settings.
+- placeholders with forms in HTML
+    - Allows a placeholder value in the form input field to guide the user
+- CSS styling
+    - Biggest one was flexbox which allowed me to vertically and horizontally align elements
+
