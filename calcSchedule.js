@@ -39,6 +39,19 @@ function updateAmortizationTable() {
     const interestRate = parseFloat(document.getElementById('interestRate').value);
     const numMonths = parseInt(document.getElementById('numMonths').value);
 
+     // Validate input values
+     if (loanAmount <= 0 || isNaN(loanAmount)) {
+        alert("Loan Amount must be greater than 0.");
+        return; 
+    }
+    if (interestRate < 0 || isNaN(interestRate)) {
+        alert("Interest rate must be positive.");
+        return; 
+    }
+    if (numMonths <= 0 || isNaN(numMonths)) {
+        alert("Loan Length must be greater than 0");
+        return; 
+    }
 
     const { amortizationSchedule, monthlyPayment, totalInterestPaid, totalAmountPaid } =
     calculateAmortizationSchedule(loanAmount, numMonths, interestRate);
