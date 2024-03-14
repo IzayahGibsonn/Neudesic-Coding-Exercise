@@ -28,10 +28,10 @@ function calculateAmortizationSchedule(loanAmount, numMonths, interestRate) {
             principalPaid: principalPaid,
         });
     }
+    // returns object
     return {
         amortizationSchedule, monthlyPayment, totalInterestPaid, totalAmountPaid
     }; 
-
 }
 
 function updateAmortizationTable() {
@@ -41,15 +41,15 @@ function updateAmortizationTable() {
 
      // Validate input values
      if (loanAmount <= 0 || isNaN(loanAmount)) {
-        alert("Loan Amount must be greater than 0.");
+        alert("Loan Amount must be a number greater than 0.");
         return; 
     }
     if (interestRate < 0 || isNaN(interestRate)) {
-        alert("Interest rate must be positive.");
+        alert("Interest rate must be a number 0 or greater.");
         return; 
     }
     if (numMonths <= 0 || isNaN(numMonths)) {
-        alert("Loan Length must be greater than 0");
+        alert("Loan Length must be a number greater than 0");
         return; 
     }
 
