@@ -24,4 +24,8 @@ Things I did external research on:
     - Allows a placeholder value in the form input field to guide the user
 - CSS styling
     - Biggest one was flexbox which allowed me to vertically and horizontally align elements
+- Formula for monthly Payment in js 
+    - Orginally my values after calculation were off so I did research and found a corrected formula online that solved the issue.
+    - https://stackoverflow.com/questions/57911510/mortgage-amortization-payment-calculations
+
 
